@@ -67,9 +67,42 @@ https://pandas.pydata.org/pandas-docs/stable/
 
 ## 2. Importar datos utilizando Pandas
 
-    - 2.1. Importar JSON.
-    - 2.2. Importar CSV.
-    - 2.3. Importar EXCEL.
+### 2.1. Importar JSON.
+
+```python
+import json
+import pandas as pd
+
+filename = 'data/conagua.json'
+with open(filename, 'r') as f:
+    data = json.load(f)
+    resultados = data['results']
+    tabla = pd.DataFrame(resultados)
+
+print(tabla.head())
+```
+
+### 2.2. Importar CSV.
+
+```python
+import pandas as pd
+
+filename = 'data/declaratorias_emergencia_desastre.csv'
+tabla = pd.read_csv(filename, encoding='utf-8')
+
+print(tabla.head())
+```
+
+### 2.3. Importar EXCEL.
+
+```python
+import pandas as pd
+
+filename = 'data/declaratorias_emergencia_desastre.xlsx'
+tabla = pd.read_excel(filename)
+
+print(tabla.head())
+```
 
 ### 2.4. Importar XML.
 
@@ -77,7 +110,83 @@ https://datos.gob.mx/busca/dataset/estaciones-de-servicio-gasolineras-y-precios-
 
 ## 3. Conociendo nuestros datos
 
-    - 3.1. Head, tail & info.
+### 3.1. Head, tail & info.
+
+Son los tres principales métodos para visualizar de manera preeliminar la información contenida dentro de un DataFrame.
+
+La [**Función Head**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.head.html) regresa las primeras n filas de una tabla. Es útil para comprobar que nuestro objeto contiene los tipos de datos correctos.
+
+```python
+df = pd.DataFrame({'animal':['alligator', 'bee', 'falcon', 'lion',
+                  'monkey', 'parrot', 'shark', 'whale', 'zebra']})
+df
+#       animal
+# 0  alligator
+# 1        bee
+# 2     falcon
+# 3       lion
+# 4     monkey
+# 5     parrot
+# 6      shark
+# 7      whale
+# 8      zebra
+
+df.head()
+#       animal
+# 0  alligator
+# 1        bee
+# 2     falcon
+# 3       lion
+# 4     monkey
+```
+
+La [**Función Tail**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.tail.html) regresa las últimas n filas de una tabla. Es útil para verificar los datos después de haber sido ordenardos o al insertar (append) de filas.
+
+```python
+df = pd.DataFrame({'animal':['alligator', 'bee', 'falcon', 'lion',
+                  'monkey', 'parrot', 'shark', 'whale', 'zebra']})
+df
+#       animal
+# 0  alligator
+# 1        bee
+# 2     falcon
+# 3       lion
+# 4     monkey
+# 5     parrot
+# 6      shark
+# 7      whale
+# 8      zebra
+
+df.tail(3)
+#    animal
+# 4  monkey
+# 5  parrot
+# 6   shark
+```
+
+La [**Función Info**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html) imprime información acerca del DataFrame, incluyendo el tipo (dtype) del índice y de las columnas, los valores nulos y el uso de memoria.
+
+```python
+df
+#    int_col text_col  float_col
+# 0        1    alpha       0.00
+# 1        2     beta       0.25
+# 2        3    gamma       0.50
+# 3        4    delta       0.75
+# 4        5  epsilon       1.00
+
+df.info()
+# <class 'pandas.core.frame.DataFrame'>
+# RangeIndex: 5 entries, 0 to 4
+# Data columns (total 3 columns):
+# int_col      5 non-null int64
+# text_col     5 non-null object
+# float_col    5 non-null float64
+# dtypes: float64(1), int64(1), object(1)
+# memory usage: 248.0+ bytes
+```
+
+
     - 3.2. Fechas y tipos de datos.
     - 3.3. Valores faltantes.
     - 3.4. Niveles de agregación y validez estadística.

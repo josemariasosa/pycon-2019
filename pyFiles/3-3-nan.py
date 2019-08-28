@@ -28,5 +28,19 @@ tabla = pd.read_csv(filename, encoding='utf-8')
 # tabla = tabla[mask].reset_index(drop=True)
 # print(tabla)
 
-promedio_por_estado = tabla.groupby(['estado'])['magniud_sismo'].mean()
-print(promedio_por_estado)
+# promedio_por_estado = tabla.groupby(['estado'])['magniud_sismo'].mean()
+# print(promedio_por_estado)
+
+# Creating the dataframe  
+df = pd.DataFrame({
+    "fecha": ["may-2019", None, None, "jun-2019", None, None],
+    "estado": ["Jalisco", None, None, "Tamaulipas", None, None],
+    "ciudad": [
+        'Guadalajara', 'Pto Vallarta', 'Tonalá', 
+        'Tampico', 'Nvo Laredo', 'Victoria'
+    ],
+    "recursos": [400, 366, 89, 511, 12, 22]
+}) 
+  
+# Print the dataframe 
+print(df.ffill())

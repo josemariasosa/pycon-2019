@@ -25,13 +25,15 @@
     - 3.4. Niveles de agregación y validez estadística.
         - Muestra vs población.
 
-- 4. Casos de uso de Pandas
+- 4. Rubik
+
+- 5. Casos de uso de Pandas
 
     - 4.1. Transformar la estructura de la información.
     - 4.2. Extracción de información específica.
     - 4.3. Agrupar la información.
 
-- 5. Seguimiento
+- 6. Seguimiento
 
 ---
 
@@ -65,9 +67,9 @@ https://pandas.pydata.org/pandas-docs/stable/
     - 1.4. Qué es un DataFrame.
         - Comparación contra un JSON.
 
-## 2. Importar datos utilizando Pandas
+## 2. Importar y exportar datos utilizando Pandas
 
-### 2.1. Importar JSON.
+### 2.1. Importar y exportar JSON.
 
 ```python
 import json
@@ -86,6 +88,14 @@ Para hacer el proceso inverso, y convertir de un data frame a un JSON se utiliza
 
 ```python
 json_structure = tabla.to_dict(orient='records')
+```
+
+Para exportar los valores de un JSON en python utilizamos la función json.dump() dentro de una estructura como se muestra a continuación.
+
+```python
+productos = productos.to_dict(orient='records')
+with open('data/productos.json', 'w') as f:
+    json.dump(productos, f)
 ```
 
 ### 2.2. Importar CSV.
@@ -539,7 +549,7 @@ print(tabla.info())
 # memory usage: 45.2+ KB
 ```
 
-#### 3.3.2. Establecer un valor que tendrán todos los valores faltantes.
+#### 3.3.2. Establecer un valor único que tendrán todos los valores faltantes.
 
 También existen casos en donde lo mejor es definir un valor arbitrario que sustituya los valores faltantes. Es común que se utilice el 0 para todas las muestras faltantes. Hay que asegurarnos que el valor que estamos definiendo sea consistente con las mediciones. En otras ocasiones, conviene utilizar un valor M, que representaría una muestra con un valor muy alto, o muy bajo. 
 
@@ -653,23 +663,353 @@ print(promedio_estado)
 # Name: magniud_sismo, dtype: float64
 ```
 
-Pandas dataframe.bfill() is used to backward fill the missing values in the dataset. It will backward fill the NaN values that are present in the pandas dataframe.
+En este punto aplican las funciones dataframe.bfill() y dataframe.ffill() que nos permiten llenar hacia atrás (backward fill) o hacia adelante (forward fill) los valores NaN presentes en un data frame. Es muy común el uso de ffill() cuando los espacios en blanco significa que se debe de utilizar el último valor que se prenta.
 
-Pandas dataframe.ffill() function is used to fill the missing value in the dataframe. ‘ffill’ stands for ‘forward fill’ and will propagate last valid observation forward.
-
+```python
+df = pd.DataFrame({
+    "fecha": ["may-2019", None, None, "jun-2019", None, None],
+    "estado": ["Jalisco", None, None, "Tamaulipas", None, None],
+    "ciudad": [
+        'Guadalajara', 'Pto Vallarta', 'Tonalá', 
+        'Tampico', 'Nvo Laredo', 'Victoria'
+    ],
+    "recursos": [400, 366, 89, 511, 12, 22]
+}) 
+  
+print(df.ffill())
+#       fecha      estado        ciudad  recursos
+# 0  may-2019     Jalisco   Guadalajara       400
+# 1  may-2019     Jalisco  Pto Vallarta       366
+# 2  may-2019     Jalisco        Tonalá        89
+# 3  jun-2019  Tamaulipas       Tampico       511
+# 4  jun-2019  Tamaulipas    Nvo Laredo        12
+# 5  jun-2019  Tamaulipas      Victoria        22
+```
 
     - 3.4. Niveles de agregación y validez estadística.
         - Muestra vs población.
 
-###########- introducir nueva sección sobre instalación y mención: de rubik
+## 4. Introducción a Rubik
 
-## 4. Casos de uso de Pandas
+### 4.1. Introducción
 
-    - 4.1. Transformar la estructura de la información.
-    - 4.2. Extracción de información específica.
-    - 4.3. Agrupar la información.
+Rubik es un módulo de Python con un listado de funciones para trabajar con Pandas.
 
-## 5. Seguimiento
+La documentación completa de rubik, con algunos ejemplos, puede ser encontrada en:
+
+https://github.com/josemariasosa/rubik
+
+### 4.2. Instalación
+
+Para instalar rubik desde la terminal, primero crear un ambiente virtual **venv**, posteriormente usar el comando de **pip install**.
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+
+pip install git+https://github.com/josemariasosa/rubik
+```
+
+Para asegurarse de que la instalación fue correcta, revisar la versión de rubik con el siguiente comando desde la terminal.
+
+```bash
+python -c 'import rubik; print(rubik.__version__)'
+# 2.0.0
+```
+
+Para utilizar rubik dentro de tus scripts, importar el módulo de rubik utilizando el alias de rk.
+
+```python
+import rubik as rk
+import pandas as pd
+```
+
+## 5. Casos de uso de Pandas
+
+### 5.1. Transformar la estructura de la información.
+
+Es muy común llevar a cabo transformaciones en la estructura de la información, sobre todo en los siguientes casos:
+
+- Eficientar una base de datos.
+- Limpieza y pre-procesamiento de información.
+- Compartir datos con un tercero que solicita una estructura definida.
+- Recibir datos de un tercero para almacenarnos siguiendo nuestra estructura.
+
+Vamos a desarrollar un ejemplo en donde vamos a transformar la estructura de un listado de productos para poderla subir a un supuesto sitio de e-commerce.
+
+#### Caso de uso: Automatizando la venta en línea
+
+Contamos con un archivo en formato csv que almacena la información de un listado de productos. Para poder subir la información de nuestros productos a un sitio de e-commerce que se encargará de publicar nuestros productos en línea, debemos de envíar un archivo JSON con la siguiente estructura:
+
+```json
+[
+    {
+        "product_name": "Playera",
+        "part_number": "t-0001",
+        "brand": "Squalo",
+        "variants": [
+            {
+                "price": "440.00",
+                "stock": "2",
+                "image": {
+                    "main": "https://assets.squalo.com/images/t-0001-blue.jpg",
+                    "images_list": [
+                        "https://assets.squalo.com/images/t-0001-blue-1.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "S"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Azul"
+                    }
+                ],
+                "currency": "MXN"
+            }
+        ]
+    }
+]
+```
+
+El JSON está conformado por los siguientes cuatro atributos principales, y subsecuentes atributos secundarios:
+
+- **product_name** - Un string que representa el nombre del producto.
+- **part_number** - Un string único por producto, ejemplos: SKU, UPC, GTIN.
+- **brand** - Un string con la marca o vendedor del producto.
+- **variants** - Una lista que a su vez contiene la información detallada de cada una de las variantes del producto. Para dar de alta una variante, se necesita crear un objeto por cada una con la siguiente información:
+    - **price** - Un string con 2 decimales del precio.
+    - **currency** - Un string indicando la moneda, ejemplos: USD, CAD, MXN.
+    - **stock** - Un string con la cantidad del producto en stock.
+    - **image** - Un diccionario que indique cuál es la imagen principal, y las imágenes secundarias, con la siguiente estructura.
+        - **main** - Un string con el url donde está hosteada la imagen.
+        - **images_list** - Una lista de strings con los urls de las imágenes secundarias. Si no hay imágenes entonces dejar la lista vacía.
+    - **attributes** - Un listado de atributos, donde cada atributo cuenta con la siguiente información:
+        - **name** - El nombre del atributo.
+        - **value** - El valor del atributo.
+
+Nuestro objetivo es realizar un script en Python que nos permita generar esta estructura de manera automatizada. La estructura con la que se cuenta ahora está en el archivo de productos. Todo el código que se mostrará a continuación se encuentra en el archivo 5-1-products.py.
+
+Vamos a generar una clase con el nombre **TransformarEstructura** que contenga un método llamado main(). El método main() cuenta con 6 pasos que irán transformando poco a poco la tabla original de productos, la cual se importó con el nombre de `productos`, a la estructura deseada.
+
+```python
+    def main(self):
+        productos = self.importar_productos()
+        productos = self.modificar_imagenes(productos)
+        productos = self.modificar_atributos(productos)
+        productos = self.modificar_precios(productos)
+        productos = self.agrupando_variantes(productos)
+
+        productos = productos.to_dict(orient='records')
+
+        print(productos)
+```
+
+Para el primer paso, el método importar_productos(), importa el archivo csv de la misma manera que en la sección de importar un csv. A partir de ahí, se pone más interesante. El método modificar_imagenes(), primero modifica el nombre de la columnas y completa los valores faltantes con un string vacío.
+
+```python
+    def formato_imagen(self, images_list):
+        return [x for x in images_list if len(x) > 0]
+
+    def modificar_imagenes(self, productos):
+        new_names = {
+            'imagen_principal': 'main'
+        }
+        productos = productos.rename(columns=new_names)
+        columnas = ['imagen_secundaria_1', 'imagen_secundaria_2']
+        for columna in columnas:
+            productos[columna] = productos[columna].fillna('')
+        productos = rk.concat_to_list(productos, columnas, 'images_list')
+        productos['images_list'] = productos['images_list'].map(self.formato_imagen)
+        productos = rk.groupto_dict(productos, ['main', 'images_list'], 'image')
+        return productos
+```
+
+Aquí vamos a utilizar el método de rubik concat_to_list() para concatenar en una misma lista las columnas de imágenes secundarias en una sola, posteriormente aplicaremos el método de nuestra clase formato_imagen() para eliminar las imágenes faltantes. Por último, el método de rubik groupto_dict() nos permite agrupar múltiples columnas en una sola como diccionario.
+
+El paso 2, modificar_atributos(), genera primero la estructura de los atributos con name y value y luego aplica el método de rubik concat_to_list() que agrupa los objetos de múltiples columnas en una sola lista.
+
+```python
+    def modificar_atributos(self, productos):
+        atributos = ['talla', 'color']
+        for atributo in atributos:
+            new_names = {atributo: 'value'}
+            productos = productos.rename(columns=new_names)
+            productos['name'] = atributo
+            productos = rk.groupto_dict(productos, ['name', 'value'], atributo)
+        productos = rk.concat_to_list(productos, atributos, 'attributes')
+        return productos
+```
+
+El paso 3 es modificar_precios(). Lo primero es actualizar el nombre de la columna de precios. Después, el método formato_precio() de nuestra clase, nos ayuda a estandarizar los precios, eliminando caracteres innecesarios. Al final, el número se convierte en un string con dos decimales.
+
+```python
+    def formato_precio(self, precio):
+        precio = precio.replace('$', '').replace('.', '').strip()
+        precio = float(precio)
+        return '{:.2f}'.format(precio)
+
+    def modificar_precios(self, productos):
+        new_names = {'precio': 'price'}
+        productos = productos.rename(columns=new_names)
+        productos['price'] = productos['price'].map(self.formato_precio)
+        productos['currency'] = 'MXN'
+        return productos
+```
+
+El paso 4 es el último método de nuestra clase, agrupando_variantes(). Para este paso se utiliza otra función de rubik que tiene una funcionalidad muy interesante. Para revisar más sobre la función groupto_list() de rubik, revisar la documentación. Para nuestros datos, esta función nos permite agrupar todas las líneas de nuestra tabala original, en función de la información del producto y sus variantes, para reducirla únicamente a los 3 productos principales, con la información de las variantes en una lista.
+
+```python
+    def agrupando_variantes(self, productos):
+        new_names = {
+            'inventario': 'stock',
+            'producto': 'product_name',
+            'numero_parte': 'part_number',
+            'marca': 'brand'
+        }
+        productos = productos.rename(columns=new_names)
+        productos['stock'] = productos['stock'].astype(str)
+        variante = ['price', 'stock', 'image', 'attributes', 'currency']
+        productos = rk.groupto_dict(productos, variante, 'variants')
+        columnas = ['product_name', 'part_number', 'brand']
+        productos = rk.groupto_list(productos, columnas, 'variants')
+        return productos
+```
+
+Por último, la tabla resultante se convierte en formato JSON y se exporta la información.
+
+```python
+    productos = productos.to_dict(orient='records')
+    with open('data/productos.json', 'w') as f:
+        json.dump(productos, f)
+```
+
+En conclusión, Pandas nos facilita el trabajo para cambiar la estructura original de nuestra información con el fin de empatarla con otra estructura nueva. Sin importar que la estructura final no sea necesariamente una tabla, como pudimos observar en este ejmplo.
+
+Rubik además permitió reducir la cantidad de código necesario para hacer operaciones complejas como agrupar los productos. Por favor, siéntete libre de trabajar con rubik y experimentar con todas las funciones que aparecen en la documentación de rubik.
+
+### 5.2. Agrupación de información (groupby).
+
+Pandas nos permite agrupar información con el objetivo de llevar a cabo cálculos, o cualquier función customizada, con los valores que pertenecen a cierto grupo. Una manera muy similar con lo que ocurre con las [tablas dinámicas de Excel](https://support.office.com/es-es/article/informaci%C3%B3n-general-sobre-tablas-din%C3%A1micas-y-gr%C3%A1ficos-din%C3%A1micos-527c8fa3-02c0-445a-a2db-7794676bce96).
+
+Existe una infinidad de posibilidades para trabajar con la función de pandas groupby(). En esta sección realizaremos un ejemplo que nos permita visualizar dos casos, agrupar valores en una tabla y aplicar una función:
+
+1. Predefinida (simple).
+2. Customizada (cualquier función que se defina en Python).
+
+#### Caso de uso: Estudio de las emergencias.
+
+Partiendo de los datos en el archivo `declaratorias_emergencia_desastre.csv`, todo el código de esta sección se encuentra en el archivo 5-2-groupby.py.
+
+Con el fin de aplicar una función predefinida, nos haremos las siguientes preguntas:
+
+- 1.1. Cuál es el promedio de la magnitud de los sismos por estado.
+- 1.2. En cuántas ciudades se registraron los sismos del estado.
+
+Para aplicar una función customizada, nos haremos la siguiente pregunta:
+
+- 2.1. Cuántas fechas distintas se tienen registradas por estado.
+- 2.2. Cuál es el promedio de la magnitud de los sismos registrados por fecha en cada estado.
+
+### 5.3. Uniendo múltiples fuentes de información (merge).
+
+Con la información de las gasolineras obtenidas de los dos archivos: places.xml y prices.xml, importada en la sección 2.4. Importar XML. 
+
+El verdadero valor de los archivos se obtiene al unir la información de las gasolineras con el precio y los productos (gasolina y diésel) que tienen a la venta.
+
+Recordemos que después de importar y transformar la información de los archivos de las gasolineras y los precios las tablas lucen de la siguiente manera:
+
+```python
+print('Tabla de precios: ')
+print(precios.head())
+# Tabla de precios:
+#   place_id                                                gas
+# 0    11703  [{'tipo': 'regular', 'precio': '20.49'}, {'tip...
+# 1    11702  [{'tipo': 'regular', 'precio': '19.69'}, {'tip...
+# 2    11701  [{'tipo': 'regular', 'precio': '14.49'}, {'tip...
+# 3    11700  [{'tipo': 'regular', 'precio': '18.56'}, {'tip...
+# 4    11699            [{'tipo': 'premium', 'precio': '20.5'}]
+
+print('\nTabla de estaciones: ')
+print(estaciones.head())
+# Tabla de estaciones:
+#   place_id                                           estacion
+# 0     2039  {'nombre': 'ESTACION DE SERVICIO CALAFIA, S.A....
+# 1     2040  {'nombre': 'DIGEPE, S.A. DE C.V. (07356)', 'cr...
+# 2     2041  {'nombre': 'DIAZ GAS, S.A. DE C.V.', 'cre_id':...
+# 3     2042  {'nombre': 'COMBU-EXPRESS, S.A. DE C.V.', 'cre...
+# 4     2043  {'nombre': 'PETROMAX, S.A. DE C.V.', 'cre_id':...
+```
+
+Podemos observar que tenemos una columna que funciona como pivote llamada place_id. La demás información está anidada en la columna de `gas` como una lista de diccionarios que almacenan el `precio` y el `tipo` de gasolina. Y en la columna de `estacion`, que almacena como un diccionario toda la información de la gasolinera.
+
+El archivo 5-3-merge.py contendrá todo el código de esta sección. Para poder unir la información de las dos fuentes, vamos a tomar las funciones que utilizamos en la sección 2.4. Importar XML, para integrarlas en una clase que se va a llamar UnirGasolinaPrecio(). Dicha clase cuenta con un método llamado main() que corre los siguientes pasos:
+
+- Paso 1: Importar y dar formato a los precios.
+- Paso 2: Importar y dar formato a las estaciones.
+- Paso 3: Llevar a cabo la unión de los precios y las estaciones.
+- Paso 4: Filtrar las estaciones sin ningún precio.
+
+```python
+    def main(self):
+        precios = self.importar_precios()
+        precios = self.formato_precios(precios)
+
+        estaciones = self.importar_estaciones()
+        estaciones = self.formato_estaciones(estaciones)
+
+        # print(precios.info(), estaciones.info())
+        resultados = pd.merge(estaciones,
+                              precios,
+                              on='place_id',
+                              how='left')
+        print('Todas las estaciones: ')
+        print(resultados.head())
+
+        mask = (resultados['diesel'].isnull()
+                & resultados['premium'].isnull()
+                & resultados['regular'].isnull())
+        estaciones_sin_precio = resultados[mask].reset_index(drop=True)
+        print('Estaciones sin precio: ')
+        print(estaciones_sin_precio.head())
+```
+
+Después de importar los precios en versión xml, vamos a darle formato. Lo primero que hacemos es la función de rubik ungroup_list(), con el fin de separar los tipos de casolina en cada fila del DataFrame. Posteriormente, mediante la función de rubik ungroup_dict() se separan en 2 columnas el precio y el tipo de gasolina.
+
+Por último, la función nativa de [pandas pivot_table()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.pivot_table.html
+) nos permite convertir la columna de `tipo` de gasolina en múltiples columnas que desplieguen el precio de la misma.
+
+```python
+    def formato_precios(self, precios):
+        precios = rk.ungroup_list(precios, 'gas')
+        precios = rk.ungroup_dict(precios, 'gas')
+        precios['precio'] = precios['precio'].astype(float)
+        precios = precios.pivot_table('precio', ['place_id'], 'tipo')
+        precios = precios.reset_index(drop=False)
+        return precios
+```
+
+Posteriormente, después de importar las estaciones aplicamos dos veces la función de rubik ungroup_dict() para desanidar los diccionarios que contienen la info de la estación y de las coordenadas de las gasolineras.
+
+```python
+    def formato_estaciones(self, estaciones):
+        estaciones = rk.ungroup_dict(estaciones, 'estacion')
+        estaciones = rk.ungroup_dict(estaciones, 'location')
+        new_names = {'x': 'coord_x', 'y': 'coord_y'}
+        return estaciones.rename(columns=new_names)
+```
+
+Para el paso 3, lo primero que se recomienda antes de llevar a cabo la unión de dos o más DataFrames es:
+1. Establecer la columna pivote, la cual se indica en el argumento by. Es importante asegurarse que las columnas tienen el mismo formato y tipo de dato.
+2. Definir el método de unión, el cual se indica en el argumento de how. Personalmente, el 99% de las ocasiones utilizo left.
+
+Ver más sobre pandas merge().
+
+Por último, para poder conocer las estaciones en la tabla que no tienen registro alguno de precio para ningún tipo de gasolina, utilizamos una máscara que nos permita filtrar cuando en las tres columnas existan valores nulos, mediante el método de pandas isnull().
+
+## 6. Seguimiento
 
 
 

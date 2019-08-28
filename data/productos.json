@@ -1,0 +1,253 @@
+[
+    {
+        "product_name": "Playera",
+        "part_number": "t-0001",
+        "brand": "Squalo",
+        "variants": [
+            {
+                "price": "440.00",
+                "stock": "2",
+                "image": {
+                    "main": "https://assets.squalo.com/images/t-0001-blue.jpg",
+                    "images_list": [
+                        "https://assets.squalo.com/images/t-0001-blue-1.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "S"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Azul"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "440.00",
+                "stock": "0",
+                "image": {
+                    "main": "https://assets.squalo.com/images/t-0001-blue.jpg",
+                    "images_list": [
+                        "https://assets.squalo.com/images/t-0001-blue-1.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "M"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Azul"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "440.00",
+                "stock": "0",
+                "image": {
+                    "main": "https://assets.squalo.com/images/t-0001.jpg",
+                    "images_list": [
+                        "https://assets.squalo.com/images/t-0001-1.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "S"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Rojo"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "440.00",
+                "stock": "3",
+                "image": {
+                    "main": "https://assets.squalo.com/images/t-0001.jpg",
+                    "images_list": [
+                        "https://assets.squalo.com/images/t-0001-1.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "M"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Rojo"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "440.00",
+                "stock": "10",
+                "image": {
+                    "main": "https://assets.squalo.com/images/t-0001.jpg",
+                    "images_list": [
+                        "https://assets.squalo.com/images/t-0001-1.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "L"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Rojo"
+                    }
+                ],
+                "currency": "MXN"
+            }
+        ]
+    },
+    {
+        "product_name": "Playera",
+        "part_number": "t-0201",
+        "brand": "Converse",
+        "variants": [
+            {
+                "price": "520.00",
+                "stock": "2",
+                "image": {
+                    "main": "https://assets.converse.com/images/t-0201.jpg",
+                    "images_list": []
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "S"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Blanco"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "520.00",
+                "stock": "1",
+                "image": {
+                    "main": "https://assets.converse.com/images/t-0201.jpg",
+                    "images_list": []
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "M"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Blanco"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "520.00",
+                "stock": "4",
+                "image": {
+                    "main": "https://assets.converse.com/images/t-0201.jpg",
+                    "images_list": [
+                        "https://assets.converse.com/images/t-0201-L.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "L"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Blanco"
+                    }
+                ],
+                "currency": "MXN"
+            }
+        ]
+    },
+    {
+        "product_name": "Tenis",
+        "part_number": "t-0433",
+        "brand": "Adidas",
+        "variants": [
+            {
+                "price": "1200.00",
+                "stock": "0",
+                "image": {
+                    "main": "https://assets.adidas.com/images/t-0433.jpg",
+                    "images_list": [
+                        "https://assets.adidas.com/images/t-0433-1.jpg",
+                        "https://assets.adidas.com/images/t-0433-2.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "MX 9"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Verde"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "1200.00",
+                "stock": "0",
+                "image": {
+                    "main": "https://assets.adidas.com/images/t-0433.jpg",
+                    "images_list": [
+                        "https://assets.adidas.com/images/t-0433-1.jpg",
+                        "https://assets.adidas.com/images/t-0433-2.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "MX 10"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Verde"
+                    }
+                ],
+                "currency": "MXN"
+            },
+            {
+                "price": "1200.00",
+                "stock": "4",
+                "image": {
+                    "main": "https://assets.adidas.com/images/t-0433.jpg",
+                    "images_list": [
+                        "https://assets.adidas.com/images/t-0433-1.jpg",
+                        "https://assets.adidas.com/images/t-0433-2.jpg"
+                    ]
+                },
+                "attributes": [
+                    {
+                        "name": "talla",
+                        "value": "MX 11"
+                    },
+                    {
+                        "name": "color",
+                        "value": "Verde"
+                    }
+                ],
+                "currency": "MXN"
+            }
+        ]
+    }
+]

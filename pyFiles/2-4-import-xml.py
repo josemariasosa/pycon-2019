@@ -1,22 +1,13 @@
 #!/usr/bin/env python
 # coding=utf-8
+# author: jose maria sosa
 
-# ------------------------------------------------------------------------------
-# From XML-file to Pandas DataFrame
-# ------------------------------------------------------------------------------
-# jose maria sosa
-
-import rubik as rk
 import pandas as pd
-
 import xml.etree.ElementTree as ET
 
-
 def importar_precios(filename):
-
     tree = ET.parse(filename)
     root = tree.getroot()
-
     data = []
     for node in root:
         precios = []
@@ -30,15 +21,12 @@ def importar_precios(filename):
             'gas': precios
         }
         data.append(to_insert)
-
     tabla = pd.DataFrame(data)
     return tabla
 
 def importar_estaciones(filename):
-
     tree = ET.parse(filename)
     root = tree.getroot()
-
     data = []
     for node in root:
         estacion = {}
@@ -70,10 +58,8 @@ def importar_estaciones(filename):
             'estacion': estacion
         }
         data.append(to_insert)
-
     tabla = pd.DataFrame(data)
     return tabla
-
 
 def main():
 
@@ -86,8 +72,6 @@ def main():
     print(precios.head())
     print('\nTabla de estaciones: ')
     print(estaciones.head())
-
-# ------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     main()

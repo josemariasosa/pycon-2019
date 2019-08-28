@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-
-# Importar JSON.
+# author: jose maria sosa
 
 import json
 import pandas as pd

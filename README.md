@@ -1,53 +1,43 @@
-# Automatizando el análisis y procesamiento de datos con Pandas.
+# Automatizando el análisis y procesamiento de datos con pandas.
 
 ## Contenido de la presentación
 
-- 1. Introducción a Pandas
-
-    - 1.1. Qué es Pandas.
-    - 1.2. Cómo instalar Pandas.
+- 1. Introducción a pandas
+    - 1.1. Qué es pandas.
+    - 1.2. Cómo instalar pandas.
     - 1.3. Dónde está la documentación oficial.
-    - 1.4. Qué es un DataFrame.
-        - Comparación contra un JSON.
 
-- 2. Importar datos utilizando Pandas
-
-    - 2.1. Importar JSON.
-    - 2.2. Importar CSV.
+- 2. Importar datos utilizando pandas
+    - 2.1. Importar y exportar JSON.
+    - 2.2. Importar y exportar CSV.
     - 2.3. Importar EXCEL.
     - 2.4. Importar XML.
 
 - 3. Conociendo nuestros datos
-
     - 3.1. Head, tail & info.
     - 3.2. Fechas y tipos de datos.
     - 3.3. Valores faltantes.
-    - 3.4. Niveles de agregación y validez estadística.
-        - Muestra vs población.
 
-- 4. Rubik
+- 4. Introducción a rubik para Python
 
-- 5. Casos de uso de Pandas
-
+- 5. Casos de uso de pandas
     - 4.1. Transformar la estructura de la información.
     - 4.2. Extracción de información específica.
     - 4.3. Agrupar la información.
 
-- 6. Seguimiento
-
 ---
 
-## 1. Introducción a Pandas
+## 1. Introducción a pandas
 
-### 1.1. Qué es Pandas.
+### 1.1. Qué es pandas.
 
-Del [sitio oficial de Pandas](https://pandas.pydata.org/). Pandas es un conjunto de herramientas para estructurar, manipular y analizar datos mediante el lenguaje de programación Python. Permite estructurar la información de manera tabular mediante el uso de tablas conocidas como **DataFrames**. A partir de un DataFrame, se vuelve relativamente sencillo la manipulación numérica y de series de tiempo.
+Consultado el [sitio oficial](https://pandas.pydata.org/), pandas es un conjunto de herramientas para estructurar, manipular y analizar datos mediante el lenguaje de programación Python. Permite estructurar la información de manera tabular mediante el uso de tablas conocidas como **DataFrames**.
 
 Pandas es de código abierto y puede ser utilizado de manera gratuita bajo la [licencia BSD](https://en.wikipedia.org/wiki/BSD_licenses).
 
-### 1.2. Cómo instalar Pandas.
+### 1.2. Cómo instalar pandas.
 
-Instalar Pandas puede resultar un poco enredos para usuarios inexpertos. La manera más simple de instalar Pandas y un listado de las librerías más populares es a través de [Anaconda](https://www.anaconda.com/distribution/). También existe una versión de tamaño más reducida, si se desea tener más control sobre los paquetes o se tiene una conexión de internet limitada, conocida como [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Instalar pandas puede resultar un poco enredos para usuarios inexpertos. La manera más simple de instalar pandas, junto con un listado de las librerías más populares, es a través de [Anaconda](https://www.anaconda.com/distribution/). También, si se desea tener más control sobre los paquetes o se tiene una conexión de internet limitada, existe una versión más reducida conocida como [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
 También se puede instalar directamente desde la terminal, utilizando el administrador de paquetes de Python pip.
 
@@ -55,7 +45,7 @@ También se puede instalar directamente desde la terminal, utilizando el adminis
 pip install pandas
 ```
 
-Toda la información para la [instalación de Pandas](https://pandas.pydata.org/pandas-docs/stable/install.html) se encuentra aquí.
+Toda la información para la [instalación de pandas](https://pandas.pydata.org/pandas-docs/stable/install.html) se encuentra aquí.
 
 ### 1.3. Dónde está la documentación oficial.
 
@@ -63,13 +53,11 @@ La documentación oficial de pandas se encuentra disponible en inglés siguiendo
 
 https://pandas.pydata.org/pandas-docs/stable/
 
-
-    - 1.4. Qué es un DataFrame.
-        - Comparación contra un JSON.
-
-## 2. Importar y exportar datos utilizando Pandas
+## 2. Importar datos utilizando pandas
 
 ### 2.1. Importar y exportar JSON.
+
+Para poder trabajar con archivos tipo JSON, hay que utilizar la función de la librería base [json **load()**](https://docs.python.org/3/library/json.html#basic-usage). El código se encuentra en el archivo **2-1-import-json.py**.
 
 ```python
 import json
@@ -84,13 +72,13 @@ with open(filename, 'r') as f:
 print(tabla.head())
 ```
 
-Para hacer el proceso inverso, y convertir de un data frame a un JSON se utiliza el método to_dict(orient='records').
+Para llevar a cabo el proceso inverso, y convertir un DataFrame a un formato JSON se utiliza el método de [pandas **to_dict(orient='records')**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_dict.html).
 
 ```python
 json_structure = tabla.to_dict(orient='records')
 ```
 
-Para exportar los valores de un JSON en python utilizamos la función json.dump() dentro de una estructura como se muestra a continuación.
+Para **exportar** un DataFrame en formato JSON utilizamos la función de [json **dump()**](https://docs.python.org/3/library/json.html#basic-usage) como se muestra a continuación.
 
 ```python
 productos = productos.to_dict(orient='records')
@@ -98,7 +86,11 @@ with open('data/productos.json', 'w') as f:
     json.dump(productos, f)
 ```
 
-### 2.2. Importar CSV.
+### 2.2. Importar y exportar CSV.
+
+Para importar un archivo en formato CSV (comma separated values), se utiliza directamente la función de [pandas **read_csv()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html).
+
+El código se encuentra en el archivo **2-2-import-csv.py**.
 
 ```python
 import pandas as pd
@@ -109,7 +101,16 @@ tabla = pd.read_csv(filename, encoding='utf-8')
 print(tabla.head())
 ```
 
+Para exportar un DataFrame se utiliza la función de [pandas **to_csv()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html) como se muestra a continuación.
+
+```python
+filename = 'data/tabla_nueva.csv'
+tabla.to_csv(filename, index=False, encoding='utf-8')
+```
+
 ### 2.3. Importar EXCEL.
+
+Pandas permite la importación directa de archivos tipo xlsx, el cual es el formato utilizado en Microsoft Excel, mediante la función de [pandas **read_excel()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html).
 
 ```python
 import pandas as pd
@@ -122,15 +123,42 @@ print(tabla.head())
 
 ### 2.4. Importar XML.
 
-https://datos.gob.mx/busca/dataset/estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel
+Descargamos, de la página oficial de [datos de gobierno](https://datos.gob.mx/busca/dataset/estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel), los archivos: **places.xml** y **prices.xml**. Para poder convertir la información contenida en los archivos a un DataFrame, no existe una manera directa de hacerlo. Sin embargo, Python nos permite procesar la información previamente para luego presentarla de manera tabular.
+
+El código de esta sección se encuentra en el archivo **2-4-import-xml.py**.
+
+El objeto base [**xml.etree.ElementTree()**](https://docs.python.org/2/library/xml.etree.elementtree.html) nos permite cargar un archivo xml, pero **requiere forzosamente** pasar por un proceso previo para poderlo convertir a una tabla. El siguiente código puede servir de apoyo para extraer la información necesaria de un xml.
+
+```python
+def importar_precios(filename):
+    tree = ET.parse(filename)
+    root = tree.getroot()
+    data = []
+    for node in root:
+        precios = []
+        for child in node:
+            precios.append({
+                'tipo': child.attrib['type'],
+                'precio': child.text
+            })
+        to_insert = {
+            'place_id': node.attrib['place_id'],
+            'gas': precios
+        }
+        data.append(to_insert)
+    tabla = pd.DataFrame(data)
+    return tabla
+```
 
 ## 3. Conociendo nuestros datos
+
+Antes de realizar algún análisis o cualquier movimiento de la información hay que estar seguro de conocer a fondo nuestra información.
 
 ### 3.1. Head, tail & info.
 
 Son los tres principales métodos para visualizar de manera preeliminar la información contenida dentro de un DataFrame.
 
-La [**Función Head**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.head.html) regresa las primeras n filas de una tabla. Es útil para comprobar que nuestro objeto contiene los tipos de datos correctos.
+La función de [pandas **head()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.head.html) regresa las primeras n filas de una tabla. Es útil para comprobar que nuestro objeto contiene los tipos de datos correctos.
 
 ```python
 df = pd.DataFrame({'animal':['alligator', 'bee', 'falcon', 'lion',
@@ -156,7 +184,7 @@ df.head()
 # 4     monkey
 ```
 
-La [**Función Tail**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.tail.html) regresa las últimas n filas de una tabla. Es útil para verificar los datos después de haber sido ordenardos o al insertar (append) de filas.
+La función de [pandas **tail()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.tail.html) regresa las últimas n filas de una tabla. Es útil para verificar los datos después de haber sido ordenardos o al insertar (append) filas.
 
 ```python
 df = pd.DataFrame({'animal':['alligator', 'bee', 'falcon', 'lion',
@@ -180,7 +208,7 @@ df.tail(3)
 # 6   shark
 ```
 
-La [**Función Info**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html) imprime información acerca del DataFrame, incluyendo el tipo (dtype) del índice y de las columnas, los valores nulos y el uso de memoria.
+La función de [pandas **info()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html) imprime información acerca del DataFrame, incluyendo el [tipo de dato (dtype)](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html) de los índices y las columnas, los valores nulos y el uso de memoria.
 
 ```python
 df
@@ -204,46 +232,26 @@ df.info()
 
 ### 3.2. Fechas y tipos de datos.
 
-object
-int64
-float64
-datetime64
-bool
+Lo primero que debemos revisar, cuando comenzamos a trabajar con datos, son los [tipos de datos (dtype)](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html) con los que estamos trabajado. Es importante asegurarnos de estar utilizando el tipo de dato correcto, porque este es uno de esos puntos que se nos olvida revisar hasta que se genera un error o algún otro resultado inesperado.
+ 
+Los tipos de datos de las columnas en pandas se conoce como **dtypes**. Los dtypes se enlistan a continuación: 
 
-Cuando comencemos a trabajar con información, lo primero que tenemos que revisar los tipos de datos con los que estamos trabajado. (Qué pasa si sumamos dos números aue son strings). En pandas pasa igual, pero el tipo de dato es por toda la columna.
+- object
+- int64
+- float64
+- datetime64
+- bool
 
-Los tipos de datos es uno de esos puntos que se nos olvida revisar hasta que se genera un error o algún otro resultado inesperado. Es algo que sd debe revisar primero cuando se importa un nuevo dataset a pandas para su subsecuente análisis.
-
-Cuando estemos haciendo cualquier tipo de analisis, es importante asegurarnos de estar utilizando el tipo de dato correcto. En el caso de pandas, inferirá de manera correcta los tipos de datos de las columnas, si este es el caso, se puede proseguir el análisis sin ningún tipo de modificación.
-
-Sin embargo, es probable que en algún punto del proceso de análisis de datos, se requiera explícitamente concertir de un tipo de dato a otro. 
-
-Los tipos de datos de las columnas en pandas se conoce como dtypes.
-
-Continuando el punto 2.1 cuando cargamos el dataset de conagua mediante un archivo json. El código completo de esta sección se encuentra en 3-2-dtypes.py.
+Trabajando con la información cargada en la sección **2.1. Importar y exportar JSON**, nos aseguraremos de contar con los tipos de datos correcto. El código completo de esta sección se encuentra en **3-2-dtypes.py**.
 
 ```python
 print(tabla.head())
-#                         _id    cityid      validdateutc winddirectioncardinal  \
-# 0  5952983359954a0adbf7ab09  MXAS0002  20170627T140000Z                   SSE
-# 1  5952983359954a0adbf7ab0a  MXAS0170  20170627T140000Z                     S
-# 2  5952983359954a0adbf7ab0b  MXAS0171  20170627T140000Z                     E
-# 3  5952983359954a0adbf7ab0c  MXAS0172  20170627T140000Z                     S
-# 4  5952983359954a0adbf7ab0d  MXAS0173  20170627T140000Z                   SSO
-
-#   probabilityofprecip relativehumidity            name  \
-# 0                  40               90  Aguascalientes
-# 1                  60               91        Asientos
-# 2                  60               84        Calvillo
-# 3                  50               83           Cosío
-# 4                  50               84        El Llano
-
-#                 date-insert  longitude           state    lastreporttime  \
-# 0  2017-06-27T17:36:43.084Z   -102.296  Aguascalientes  20170627T092449Z
-# 1  2017-06-27T17:36:43.088Z  -102.0893  Aguascalientes  20170627T092453Z
-# 2  2017-06-27T17:36:43.088Z  -102.7188  Aguascalientes  20170627T092453Z
-# 3  2017-06-27T17:36:43.088Z     -102.3  Aguascalientes  20170627T092453Z
-# 4  2017-06-27T17:36:43.089Z  -101.9653  Aguascalientes  20170627T092453Z
+#                         _id    cityid      validdateutc   ...
+# 0  5952983359954a0adbf7ab09  MXAS0002  20170627T140000Z
+# 1  5952983359954a0adbf7ab0a  MXAS0170  20170627T140000Z
+# 2  5952983359954a0adbf7ab0b  MXAS0171  20170627T140000Z
+# 3  5952983359954a0adbf7ab0c  MXAS0172  20170627T140000Z
+# 4  5952983359954a0adbf7ab0d  MXAS0173  20170627T140000Z
 
 #     skydescriptionlong stateabbr tempc  latitude iconcode windspeedkm
 # 0  Tormentas dispersas       AGU    17  21.87982       96           6
@@ -253,7 +261,7 @@ print(tabla.head())
 # 4  Tormentas dispersas       AGU    17  21.91887       96           3
 ```
 
-Si por alguna razón quisieramos sumar los valores de la columna `probabilityofprecip` y `relativehumidity` entonces utilizando pandas sumaremos los valores de dos columnas se haría de la siguiente manera.
+Si quisieramos sumar los valores de las columnas `probabilityofprecip` y `relativehumidity`, lo llevaríamos a cabo de la siguiente manera.
 
 ```python
 resultados = tabla['probabilityofprecip'] + tabla['relativehumidity']
@@ -272,9 +280,9 @@ print(resultados)
 # Length: 100, dtype: object
 ```
 
-Los resultados no son, notoriamente, los esperados de una suma correcta. Queríamos sumar las cantidades de las dos columnas, y lo que se consiguió es un string más largo. Y parte de la solución se encuentra en el dtype de la columna de resultados (dtype: object). Un `object` es un string en pandas por lo tanto realiza operaciones de strings no matemáticas.
+Los resultados no son, claramente, los esperados. Queríamos sumar las cantidades de las dos columnas, y lo que se obtuvo fue concatenar los valores. Parte de la solución se encuentra en el **dtype: object** de la columna resultante. Un `object` es un string en pandas, por lo tanto, realiza operaciones de strings no aritméticas.
 
-Si queremos conocer los tipos de datos de un dataframe, utilizar el atributo tabla.dtypes:
+Si queremos conocer los tipos de datos de un DataFrame, utilizamos el atributo de [pandas dtypes](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html):
 
 ```python
 print(tabla.dtypes)
@@ -298,21 +306,20 @@ print(tabla.dtypes)
 # dtype: object
 ```
 
-Como se puede apreciar, todas las columnas, a pesar de que algunas contenían valores numéricos, fueron registradas en pandas como object.
+Todas las columnas, a pesar de contener algunas valores numéricos, fueron interpretadas en pandas como strings. Para convertir un tipo de dato en pandas existen tres opciones básicas:
 
-Para convertir un tipo de dato en pandas existen tres opciones básicas:
+- Utilizar [**astype()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html) para forzar el dtype adecuado.
+- Crear una función customizada para convertir el tipo de dato.
+- Utilizar las funciones de pandas [**to_numeric()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_numeric.html) o [**to_datetime()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html).
 
-- Utilizar astype() para forzar el dtype adecuado.
-- Crear una función para convertir el tipo de dato.
-- Utilizar una función de pandas como to_numeric() or to_datetime().
-
-Revisaremos a detalle cada una de estas.
+Revisaremos a detalle cada una de estas 3 opciones.
 
 #### 3.2.1. El método astype().
 
-El método más simple de convertir una columna de pandas a los diferentes tipos es utilizar astype(). Por ejemplo, convertamos las columnas `probabilityofprecip` y `relativehumidity` a valores numéricos y hagamos la suma de manera correcta.
+El método más simple para convertir una columna a los diferentes tipos de datos es utilizar la función de [pandas **astype()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.astype.html). Por ejemplo, convertiremos las columnas `probabilityofprecip` y `relativehumidity` a valores numéricos para realizar la suma de manera correcta.
 
 ```python
+# Convertir el tipo de dato de objeto a entero.
 tabla['probabilityofprecip'] = tabla['probabilityofprecip'].astype(int)
 tabla['relativehumidity'] = tabla['relativehumidity'].astype(int)
 
@@ -332,17 +339,17 @@ print(resultados)
 # Length: 100, dtype: int64
 ```
 
-El método astype() nos permitió interpretar los valores como enteros, en lugar de líneas de caracteres, para poder realizar la suma.
-
 #### 3.2.2. Creando una función customisada.
 
-Otra opción es utilizando la función map, para aplicar una función en toda la columna. La opción más directa sería:
+Otra opción es utilizando la función de [pandas **map()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.map.html), para aplicar una función en **cada uno de los elementos** de una columna. La opción más directa sería:
 
 ```python
 tabla['probabilityofprecip'] = tabla['probabilityofprecip'].map(int)
 ```
 
-Esta sintaxis funciona igual que astype(). Sin embargo, quizá querramos utilizar funciones más complicadas, como por ejemplo: convertir latitud y longitud en valores flotantes, conservando únicamente los valores redondeados hasta 3 decimales. Podemos utilizar una función lambda, aux_fun(), que convierta a tipo float y luego convierta el valor a 3 decimales. Al final, podemos utilizart una variable auxiliar `select` para filtrar las columnas de mi data frame e imprimir los valores de esas 2 columns.
+Esta sintaxis funciona de manera similar a **astype()**. Sin embargo, quizá querramos utilizar funciones más complicadas, como por ejemplo: convertir las columnas `latitud` y `longitud` en valores flotantes, conservando únicamente los valores redondeados hasta 3 decimales. 
+
+Podemos utilizar una función lambda, que llamaremos **aux_fun()**, que convierta a tipo float y luego redondeé el valor a 3 decimales. Al final, podemos utilizar una variable auxiliar `select` para filtrar las columnas del DataFrame.
 
 ```python
 aux_fun = lambda s: round(float(s), 3)
@@ -359,7 +366,7 @@ print(tabla[select].head())
 # 4   -101.965   -101.965
 ```
 
-Para el siguiente caso podríamos utilizar una pequeña estandarización de un string para interpretar correctamente su valor numérico definiendo una función en python. Añadiendo un pequeño condicional para evitar que si el string no puede ser identificado como numérico, no nos arroje un error, y regrese un valor nulo, 0.
+Para el siguiente caso, podríamos llevar a cabo la estandarización de un string, para interpretar correctamente su valor numérico, declarando una función en Python.
 
 ```python
 def standard_text_to_int(s):
@@ -387,11 +394,11 @@ print(tabla[select])
 # Name: windspeedkm, Length: 100, dtype: int64
 ```
 
-Recordemos que la función isinstance() regresa True si el objeto dato es un string. Posteriormente, el método de los strings strip() elimina espacios innecesarios al inicio y al final. Y por último, isdigit() evalúa si es posible convertir un texto a un valor entero, evitando de esta manera algún error en el código.
+Recordemos que la función [base **isinstance()**](https://docs.python.org/3/library/functions.html) regresa **True** si el objeto es un string. Posteriormente, el método de los [strings **strip()**](https://docs.python.org/3.7/library/string.html) elimina espacios innecesarios al inicio y al final. Por último, [**isdigit()**](https://docs.python.org/3.7/library/string.html) evalúa si es posible convertir un texto a un valor entero, previniendo errores en el código.
 
 #### 3.2.3. Uso de tiempo y fechas.
 
-Es muy común que la fecha se almacene como string, es importante si se desean utilizar los valores como fechas, se interpreten de esta manera. Una de las maneras es a través de la función `pd.to_datetime()`.
+Es común que la fecha se almacene como string, si se desean utilizar las propiedades de las fechas, hay que convertir la columna a formato **datetime**. Una de las maneras de llevar a cabo esto es a través de la función de [pandas to_datetime()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html).
 
 ```python
 date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
@@ -413,7 +420,7 @@ print(tabla[select])
 # Name: date-insert, Length: 100, dtype: datetime64[ns]
 ```
 
-El dtype cambió a datetime64[ns]. Se puede revisar la [información completa](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) de los formatos de fecha en Python, pero los más comunes son: "%d-%m-%Y", "%d/%m/%Y" y "%m-%y"; donde:
+El dtype cambió a datetime64[ns]. Recomiendo revisar la [información completa](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) de los formatos de fecha en Python, pero los formatos más comunes son: `"%d-%m-%Y"`, `"%d/%m/%Y"` y `"%m-%y"`; donde:
 
 - **%d** - indica el día del mes en dos dígitos: 21, 04, 31 son válidos.
 - **%m** - indica el mes en dos dígitos: 01, 12, 09 son válidos.
@@ -421,7 +428,7 @@ El dtype cambió a datetime64[ns]. Se puede revisar la [información completa](h
 - **%Y** - indica el año con 4 dígitos: 2000, 1998 y 2019 son válidos.
 - **%y** - indica el año con 2 dígitos: 99, 19, 00 son válidos.
 
-Al final, los tipos de datos de nuestro dataframe deben lucir de la siguiente manera.
+Al final, después de revisar toda la información, los tipos de datos de nuestro DataFrame deben lucir de la siguiente manera.
 
 ```python
 print(tabla.dtypes)

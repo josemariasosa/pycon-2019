@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-
-# Importar CSV.
+# author: jose maria sosa
 
 import rubik as rk
 import pandas as pd

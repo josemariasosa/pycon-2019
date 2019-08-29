@@ -2,25 +2,25 @@
 
 ## Contenido de la presentación
 
-- 1. Introducción a pandas
+1. Introducción a pandas
     - 1.1. Qué es pandas.
     - 1.2. Cómo instalar pandas.
     - 1.3. Dónde está la documentación oficial.
 
-- 2. Importar datos utilizando pandas
+2. Importar datos utilizando pandas
     - 2.1. Importar y exportar JSON.
     - 2.2. Importar y exportar CSV.
     - 2.3. Importar EXCEL.
     - 2.4. Importar XML.
 
-- 3. Conociendo nuestros datos
+3. Conociendo nuestros datos
     - 3.1. Head, tail & info.
     - 3.2. Fechas y tipos de datos.
     - 3.3. Valores faltantes.
 
-- 4. Introducción a rubik para Python
+4. Introducción a rubik para Python
 
-- 5. Casos de uso de pandas
+5. Casos de uso de pandas
     - 4.1. Transformar la estructura de la información.
     - 4.2. Extracción de información específica.
     - 4.3. Agrupar la información.
@@ -163,7 +163,7 @@ La función de [pandas **head()**](https://pandas.pydata.org/pandas-docs/stable/
 ```python
 df = pd.DataFrame({'animal':['alligator', 'bee', 'falcon', 'lion',
                   'monkey', 'parrot', 'shark', 'whale', 'zebra']})
-df
+print(df)
 #       animal
 # 0  alligator
 # 1        bee
@@ -175,7 +175,7 @@ df
 # 7      whale
 # 8      zebra
 
-df.head()
+print(df.head())
 #       animal
 # 0  alligator
 # 1        bee
@@ -189,7 +189,7 @@ La función de [pandas **tail()**](https://pandas.pydata.org/pandas-docs/stable/
 ```python
 df = pd.DataFrame({'animal':['alligator', 'bee', 'falcon', 'lion',
                   'monkey', 'parrot', 'shark', 'whale', 'zebra']})
-df
+print(df)
 #       animal
 # 0  alligator
 # 1        bee
@@ -201,17 +201,17 @@ df
 # 7      whale
 # 8      zebra
 
-df.tail(3)
+print(df.tail(3))
 #    animal
-# 4  monkey
-# 5  parrot
 # 6   shark
+# 7   whale
+# 8   zebra
 ```
 
 La función de [pandas **info()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html) imprime información acerca del DataFrame, incluyendo el [tipo de dato (dtype)](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html) de los índices y las columnas, los valores nulos y el uso de memoria.
 
 ```python
-df
+print(df)
 #    int_col text_col  float_col
 # 0        1    alpha       0.00
 # 1        2     beta       0.25
@@ -219,7 +219,7 @@ df
 # 3        4    delta       0.75
 # 4        5  epsilon       1.00
 
-df.info()
+print(df.info())
 # <class 'pandas.core.frame.DataFrame'>
 # RangeIndex: 5 entries, 0 to 4
 # Data columns (total 3 columns):
@@ -242,7 +242,7 @@ Los tipos de datos de las columnas en pandas se conoce como **dtypes**. Los dtyp
 - datetime64
 - bool
 
-Trabajando con la información cargada en la sección **2.1. Importar y exportar JSON**, nos aseguraremos de contar con los tipos de datos correcto. El código completo de esta sección se encuentra en **3-2-dtypes.py**.
+Trabajando con la información cargada en la sección [**2.1. Importar y exportar JSON**](https://github.com/josemariasosa/pycon-2019#21-importar-y-exportar-json), nos aseguraremos de contar con los tipos de datos correcto. El código completo de esta sección se encuentra en **3-2-dtypes.py**.
 
 ```python
 print(tabla.head())
@@ -454,7 +454,7 @@ print(tabla.dtypes)
 
 ### 3.3. Valores faltantes.
 
-Para esta sección trabajaremos con el dataframe que importamos en la sección 2.2. Importar CSV, sobre las declaraciones de emergencia y desastres. El código de esta sección puede ser consultado en 3-3-nan.py. Cuando se imprimen los valores ausentes dentro de un data frame aparecen como NaN. 
+Para esta sección trabajaremos con el DataFrame que importamos en [2.2. Importar y exportar CSV](https://github.com/josemariasosa/pycon-2019#22-importar-y-exportar-csv), sobre la declaración de sismos. El código de esta sección puede ser consultado en **3-3-nan.py**. Cuando se imprimen los valores ausentes dentro de un DataFrame aparecen como [**NaN**](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html).
 
 ```python
 print(tabla.head())
@@ -480,9 +480,9 @@ print(tabla.head())
 # 4   2017-09-07
 ```
 
-También la función info() nos permite visualizar cuántos valores de la columna son faltantes. Para el caso de la columna `declaratoria_emergencia_ordinaria`, únicamente se cuenta con 75 objetos no nulos.
+La función de [pandas **info()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html) nos permite visualizar cuántos valores en una columna son faltantes. Por ejemplo, la columna `declaratoria_emergencia_ordinaria` únicamente cuenta con 75 objetos no nulos.
 
-Es importante mencionar que cuando una **columna de valores enteros** cuenta con un valor faltante, automáticamente la lista se convierte del tipo flotante.
+Es importante mencionar que cuando una **columna de valores enteros** cuenta con un valor faltante, automáticamente la lista se convierte en tipo flotante.
 
 ```python
 print(tabla.info())
@@ -501,11 +501,11 @@ print(tabla.info())
 # memory usage: 45.4+ KB
 ```
 
-Es muy importante definir una estratégia sobre cómo se manejarán los valores ausentes. Las principales maneras de hacerlo son 3:
+Para poder trabajar con valores faltantes, en un DataFrame, es crucial definir una estratégia. Las principales maneras de hacerlo son 3:
 
-- Eliminar las muestras con valores faltantes.
-- Establecer un valor que tendrán todos los valores faltantes.
-- Cálculo de un valor.
+- **Eliminar** las muestras con valores faltantes.
+- Establecer un **valor fijo** que tendrán todos los valores faltantes.
+- Cálculo de un **valor dinámico** que trate de reflejar un valor coherente.
 
 Revisaremos a detalle cada una de ellas.
 
@@ -520,7 +520,7 @@ Las cuatro columnas que tienen valores faltantes son:
 # magniud_sismo                             722 non-null float64
 ```
 
-Vamos a eliminar todas las muestras en donde se tenga algún valor faltante. La función dropna() nos permite eliminar las filas, o muestras, donde al menos uno de los valores esté ausente.
+Para eliminar todas las muestras en donde exista al menos un valor faltante se utiliza la función de [pandas **dropna()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dropna.html).
 
 ```python
 tabla = tabla.dropna()
@@ -530,11 +530,11 @@ print(tabla.info())
 # Index: []
 ```
 
-Podemos encontrar que el resultado es una tabla vacío, pues entro de todas las filas hay valores faltantes, entonces nos resulta poco útil abordar los valores faltantes bajo esta regla. Entonces lo que haremos es eliminar todas las observaciones únicamente en donde `magniud_sismo` se encuentre ausente.
+Tristemente obtenemos un DataFrame vacío. No existe una sola muestra donde no haya al menos un valor faltante. Entonces, lo que haremos es eliminar todas las observaciones únicamente en donde `magniud_sismo` se encuentre ausente.
 
-Cuando queremos eliminar, de una sola columna, los valores ausentes, tenemos que crear una máscara que nos permita filtrar los valores correspondientes, en este caso los que son faltantes, mediante el método isnull(). Posteriormente, el símbolo `~` nos permite invertir los valores booleanos, debido a que si son nulos son True.
+Cuando queremos eliminar, los valores ausentes de una columna, tenemos que crear una columna ficticia (conocida como **mask**) que nos permita filtrar los valores correspondientes, mediante el método de [pandas **isnull()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.isnull.html). Posteriormente, el símbolo `~` sobre **mask**, nos permite invertir los valores booleanos.
 
-Por último, reset_index(drop=True) vuelve a establecer el orden del índice. Si se le indica drop=False, entonces los índices actuales se convierten en una columna más del dataframe. Aprender más sobre [reset_index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html).
+Por último, el método de [pandas **reset_index()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html) reinicia el la numeración de los índices. Si se le indica drop=False, entonces los índices actuales se convierten en una columna más del dataframe. Aprender más sobre [reset_index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html).
 
 ```python
 mask = tabla['magniud_sismo'].isnull()

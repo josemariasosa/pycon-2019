@@ -432,7 +432,7 @@ print(tabla.dtypes)
 
 Cuando se imprimen los valores ausentes dentro de un DataFrame aparecen como [**NaN**](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html).
 
-Para esta sección, trabajaremos con el DataFrame que importamos en la sección [2.2. Importar y exportar CSV](https://github.com/josemariasosa/pycon-2019#22-importar-y-exportar-csv), sobre la magnitud de sismos. 
+Para esta sección, trabajaremos con el DataFrame que importamos en la sección [**2.2. Importar y exportar CSV**](https://github.com/josemariasosa/pycon-2019#22-importar-y-exportar-csv), sobre la magnitud de sismos. 
 
 El código completo de esta sección puede ser consultado en [**3-3-nan.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/3-3-nan.py).
 
@@ -540,7 +540,7 @@ print(tabla.info())
 
 Existen casos en donde lo mejor es definir un **valor único** que sustituya los valores faltantes. Considerando que el valor que se defina sea consistente con las mediciones. Es común que se utilice un string, el valor 0, o algún otro estimador.
 
-Para este ejemplo, continuaremos con los valores faltantes de la sección anterior. Para las columnas `declaratoria_emergencia_ordinaria`, `declaratoria_emergencia_extraordinaria` y `declaratoria_desastre` cambiaremos los valores faltantes por el string de **no-aplica** utilizando el método de [pandas **fillna()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html).
+Para este ejemplo, continuaremos con los valores faltantes de la sección anterior. Para las columnas `declaratoria_emergencia_ordinaria`, `declaratoria_emergencia_extraordinaria` y `declaratoria_desastre` cambiaremos los valores faltantes por el string de **'no-aplica'** utilizando el método de [pandas **fillna()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html).
 
 ```python
 columns = [

@@ -78,7 +78,6 @@ class TransformarEstructura(object):
         productos = productos.to_dict(orient='records')
         with open('data/productos.json', 'w') as f:
             json.dump(productos, f)
-
         print(productos)
 
 if __name__ == '__main__':

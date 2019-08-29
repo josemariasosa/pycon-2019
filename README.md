@@ -33,15 +33,15 @@
 
 ### 1.1. Qué es pandas.
 
-Consultado el [sitio oficial](https://pandas.pydata.org/), pandas es un conjunto de herramientas para estructurar, manipular y analizar datos mediante el lenguaje de programación Python. Permite estructurar la información de manera tabular mediante el uso de tablas conocidas como **DataFrames**.
+Consultado el [sitio oficial](https://pandas.pydata.org/), pandas es un conjunto de herramientas para estructurar, manipular y analizar datos mediante el lenguaje de programación python. Permite estructurar la información de manera tabular mediante el uso de tablas conocidas como **DataFrames**.
 
 Pandas es de código abierto y puede ser utilizado de manera gratuita bajo la [licencia BSD](https://en.wikipedia.org/wiki/BSD_licenses).
 
 ### 1.2. Cómo instalar pandas.
 
-Instalar pandas puede resultar un poco enredos para usuarios inexpertos. La manera más simple de instalar pandas, junto con un listado de las librerías más populares, es a través de [Anaconda](https://www.anaconda.com/distribution/). También, si se desea tener más control sobre los paquetes o se tiene una conexión de internet limitada, existe una versión más reducida conocida como [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Instalar pandas puede resultar un poco enredos para usuarios inexpertos. La manera más simple de instalar pandas, junto con un listado de las librerías más populares, es a través de [Anaconda](https://www.anaconda.com/distribution/). También, si se desea tener más control sobre los paquetes o se tiene una conexión de internet limitada, existe una versión de tamaño más reducida conocida como [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-También se puede instalar directamente desde la terminal, utilizando el administrador de paquetes de Python pip.
+Sin embargo, la manera más directa es instalar pandas directamente desde la terminal, utilizando el administrador de paquetes de python pip.
 
 ```bash
 pip install pandas
@@ -59,7 +59,7 @@ https://pandas.pydata.org/pandas-docs/stable/
 
 ### 2.1. Importar y exportar JSON.
 
-Para poder trabajar con archivos tipo JSON, hay que utilizar la función de la librería base [json **load()**](https://docs.python.org/3/library/json.html#basic-usage). El código se encuentra en el archivo **2-1-import-json.py**.
+Para poder trabajar con archivos tipo JSON, hay que utilizar la función de la librería base [json **load()**](https://docs.python.org/3/library/json.html#basic-usage). El código se encuentra en el archivo [**2-1-import-json.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/2-1-import-json.py).
 
 ```python
 import json
@@ -92,7 +92,7 @@ with open('data/productos.json', 'w') as f:
 
 Para importar un archivo en formato CSV (comma separated values), se utiliza directamente la función de [pandas **read_csv()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html).
 
-El código completo de esta sección se encuentra en el archivo **2-2-import-csv.py**.
+El código completo de esta sección se encuentra en el archivo [**2-2-import-csv.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/2-2-import-csv.py).
 
 ```python
 import pandas as pd
@@ -127,11 +127,11 @@ print(tabla.head())
 
 Para trabajar con datos en formato xml, descargamos un par de archivos sobre la información de los **precios de la gasolina** desde la página oficial de [datos de gobierno](https://datos.gob.mx/busca/dataset/estaciones-de-servicio-gasolineras-y-precios-finales-de-gasolina-y-diesel). Nombramos los archivos: **places.xml** y **prices.xml**.
 
-No existe una manera directa de convertir el formato de la información contenida en un archivo xml a un formato tabular. Sin embargo, mediante Python podemos pre-procesar los datos para convertirlos en un DataFrame.
+No existe una manera directa de convertir el formato de la información contenida en un archivo xml a un formato tabular. Sin embargo, mediante python podemos pre-procesar los datos para convertirlos en un DataFrame.
 
-El código completo de esta sección se encuentra en el archivo **2-4-import-xml.py**.
+El código completo de esta sección se encuentra en el archivo [**2-4-import-xml.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/2-4-import-xml.py).
 
-Para cargar un archivo xml en Python necesitamos de la función **parse()** contenida en la librería base [**xml.etree.ElementTree**](https://docs.python.org/2/library/xml.etree.elementtree.html). El siguiente código puede servir de apoyo para extraer la información necesaria de un xml.
+Para cargar un archivo xml en python necesitamos de la función [**parse()**](https://docs.python.org/2/library/xml.etree.elementtree.html) contenida en la librería base [**xml.etree.ElementTree**](https://docs.python.org/2/library/xml.etree.elementtree.html). El siguiente código puede servir de apoyo para extraer la información necesaria de un xml.
 
 ```python
 def importar_precios(filename):
@@ -212,7 +212,7 @@ Los tipos de datos en pandas se conoce como **dtypes**. Los dtypes se enlistan a
 
 Trabajando con la información cargada en la sección [**2.1. Importar y exportar JSON**](https://github.com/josemariasosa/pycon-2019#21-importar-y-exportar-json), nos aseguraremos de contar con los tipos de datos correcto.
 
-El código completo de esta sección se encuentra en **3-2-dtypes.py**.
+El código completo de esta sección se encuentra en [**3-2-dtypes.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/3-2-dtypes.py).
 
 ```python
 print(tabla.head())
@@ -252,7 +252,7 @@ print(resultados)
 
 Los resultados no son, claramente, los esperados. Queríamos sumar las cantidades de las dos columnas, y lo que se obtuvo fue concatenar los valores. Parte de la solución se encuentra en el **dtype: object** de la columna resultante. Un `object` es un string en pandas, por lo tanto, realiza operaciones de strings no aritméticas.
 
-Si queremos conocer los tipos de datos de un DataFrame, utilizamos el atributo de [pandas dtypes](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html):
+Si queremos conocer los tipos de datos de un DataFrame, utilizamos el atributo de [pandas **dtypes**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html):
 
 ```python
 print(tabla.dtypes)
@@ -317,13 +317,13 @@ Otra opción es utilizando la función de [pandas **map()**](https://pandas.pyda
 tabla['probabilityofprecip'] = tabla['probabilityofprecip'].map(int)
 ```
 
-Esta sintaxis funciona de manera similar a **astype()**. Sin embargo, quizá querramos utilizar funciones más complicadas, hagamos 2 ejemplos, con una función lambda y declarando una función. 
+Esta sintaxis funciona de manera similar a **astype()**. Sin embargo, quizá querramos utilizar funciones que lleven a cabo más pasos. Vamos a realizar 2 ejemplos: 1) con una función lambda y 2) declarando una función. 
 
 ##### Ejemplo 1: Función lambda
 
-Convertamos las columnas `latitud` y `longitud` en valores flotantes, conservando únicamente los valores redondeados hasta 3 decimales. 
+Queremos convertir las columnas de `latitud` y `longitud` en valores flotantes, conservando únicamente los valores redondeados hasta 3 decimales. 
 
-Nuestra función lambda convertirá el string a tipo float y luego redondiará el valor a 3 decimales. Al final, podemos utilizar una variable auxiliar `select` para filtrar las columnas del DataFrame.
+Nuestra función lambda convertirá el string a tipo float y luego redondeará el valor a 3 decimales. Al final, podemos utilizar una variable auxiliar `select` para filtrar las columnas del DataFrame.
 
 ```python
 aux_fun = lambda s: round(float(s), 3)
@@ -374,7 +374,7 @@ Recordemos que la función [base **isinstance()**](https://docs.python.org/3/lib
 
 #### 3.2.3. Uso de tiempo y fechas.
 
-Es común que la fecha se almacene como string, si se desean utilizar las propiedades de las fechas, hay que convertir la columna a formato **datetime**. Una de las maneras de llevar a cabo esto es a través de la función de [pandas to_datetime()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html).
+Es común que la fecha se almacene como string, si se desean utilizar las propiedades de las fechas, hay que convertir la columna a formato **datetime**. Una de las maneras de llevar a cabo esto es a través de la función de [pandas **to_datetime()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html).
 
 ```python
 date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
@@ -396,7 +396,7 @@ print(tabla[select])
 # Name: date-insert, Length: 100, dtype: datetime64[ns]
 ```
 
-El dtype cambió a datetime64[ns]. Recomiendo revisar la [información completa](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) de los formatos de fecha en Python, pero los formatos más comunes son: `"%d-%m-%Y"`, `"%d/%m/%Y"` y `"%m-%y"`; donde:
+El dtype cambió a datetime64[ns]. Recomiendo revisar la [información completa](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) de los formatos de fecha en python, pero los formatos más comunes son: `"%d-%m-%Y"`, `"%d/%m/%Y"` y `"%m-%y"`; donde:
 
 - **%d** - indica el día del mes en dos dígitos: 21, 04, 31 son válidos.
 - **%m** - indica el mes en dos dígitos: 01, 12, 09 son válidos.
@@ -432,9 +432,9 @@ print(tabla.dtypes)
 
 Cuando se imprimen los valores ausentes dentro de un DataFrame aparecen como [**NaN**](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html).
 
-Para esta sección trabajaremos con el DataFrame que importamos en la sección [2.2. Importar y exportar CSV](https://github.com/josemariasosa/pycon-2019#22-importar-y-exportar-csv), sobre la magnitud de sismos. 
+Para esta sección, trabajaremos con el DataFrame que importamos en la sección [2.2. Importar y exportar CSV](https://github.com/josemariasosa/pycon-2019#22-importar-y-exportar-csv), sobre la magnitud de sismos. 
 
-El código completo de esta sección puede ser consultado en **3-3-nan.py**.
+El código completo de esta sección puede ser consultado en [**3-3-nan.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/3-3-nan.py).
 
 ```python
 print(tabla.head())
@@ -514,7 +514,7 @@ Tristemente obtenemos un DataFrame vacío. No existe una sola muestra donde no h
 
 Cuando queremos eliminar, los valores ausentes de una columna, tenemos que crear una columna ficticia (conocida como **mask**) que nos permita filtrar los valores correspondientes, mediante el método de [pandas **isnull()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.isnull.html). El símbolo `~` sobre **mask**, nos permite invertir los valores booleanos.
 
-Por último, el método de [pandas **reset_index()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html) reinicia el la numeración de los índices. Si se le indica drop=False, entonces los índices actuales se convierten en una columna más del dataframe. Aprender más sobre [reset_index](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html).
+Por último, el método de [pandas **reset_index()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.reset_index.html) reinicia el la numeración de los índices. Si se le indica drop=False, entonces los índices actuales se convierten en una columna más del dataframe.
 
 ```python
 mask = tabla['magniud_sismo'].isnull()
@@ -576,7 +576,7 @@ print(tabla.head())
 
 ##### Utilizando rubik para sustituir los valores faltantes por listas vacías.
 
-En la sección **4. Introducción a rubik** revisaremos el módulo de rubik, mientras tanto, introduciremos la función de [rubik fillna_list()](https://github.com/josemariasosa/rubik#1-the-rkfillna_list-function) que nos permite sustituir los valores faltantes por listas vacías.
+En la sección [**4. Introducción a rubik**](https://github.com/josemariasosa/pycon-2019#4-introducci%C3%B3n-a-rubik) revisaremos el módulo de rubik, mientras tanto, introduciremos la función de [rubik **fillna_list()**](https://github.com/josemariasosa/rubik#1-the-rkfillna_list-function) que nos permite sustituir los valores faltantes por listas vacías.
 
 ```python
 new = rk.fillna_list(original, 'Roles')
@@ -614,13 +614,13 @@ En nuestro ejemplo tenemos varias mediciones de la `magniud_sismo` que están au
 
 ```python
 tabla['magniud_sismo'] = (tabla.groupby('estado')['magniud_sismo']
-                             .transform(lambda x: x.fillna(x.mean())))
+                               .transform(lambda x: x.fillna(x.mean())))
 print(tabla.info())
 ```
 
 ##### Utilizando las funciones bfill y ffill
 
-Las funciones de [pandas **bfill()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.bfill.html) y [pandas **ffill()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.ffill.html) nos permiten llenar hacia atrás (backward fill) o hacia adelante (forward fill) los valores NaN presentes en un DataFrame. Es muy común el uso de **ffill()** cuando los espacios en blanco representan el último valor utilizado.
+Las funciones de [pandas **bfill()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.bfill.html) y [pandas **ffill()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.ffill.html) nos permiten llenar hacia atrás (backward fill) o hacia adelante (forward fill) los valores NaN presentes en un DataFrame.
 
 En este ejemplo, la fecha y el estado no están presentes, pero se pueden definir a partir del último valor en la tabla.
 
@@ -649,13 +649,13 @@ print(df.ffill())
 
 ### 4.1. Introducción.
 
-Rubik es un módulo sencillo de Python que compila un listado de funciones para trabajar con Pandas. Las funciones listadas de rubik realizan una abstracción de pasos concretos para permitir llevar a cabo transformaciones sencillas en la estructura de los DataFrames de pandas con el fin de reducir la cantidad de código necesario para desempeñar dicha actividad.
+Rubik es un módulo sencillo para python que compila un listado de funciones para trabajar con pandas. Las funciones listadas en rubik llevan a cabo una abstracción de pasos concretos para permitir llevar a cabo transformaciones sencillas en la estructura de los DataFrames de pandas, con el fin de reducir la cantidad de código necesario para desempeñar dicha actividad.
 
-Como un buen ejemplo, la función de [rubik ungroup_list()](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function) permite transformar un DataFrame que tiene listas anidadas en una columna, por otro con las listas desplegadas en filas nuevas. Por otro lado, la función de [rubik groupto_list()](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function) lleva a cabo la operación inversa, agrupa las filas de un DataFrame para generar listas.
+Un buen ejemplo es la función de [rubik **ungroup_list()**](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function) permite transformar un DataFrame que tiene listas anidadas en una columna, por otro con las listas desplegadas en filas nuevas. Por otro lado, la función de [rubik **groupto_list()**](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function) lleva a cabo la operación inversa, agrupa las filas de un DataFrame para generar listas.
 
 El siguiente par de tablas describen perfectamente estos dos comportamientos.
 
-La función de [rubik ungroup_list()](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function) permite ir de esta tabla a la siguiente.
+La función de [rubik **ungroup_list()**](https://github.com/josemariasosa/rubik#3-the-rkungroup_list-function) permite ir de esta tabla a la siguiente.
 
 | Entry | Id       | Roles  |
 |-------|----------|--------|
@@ -663,7 +663,7 @@ La función de [rubik ungroup_list()](https://github.com/josemariasosa/rubik#3-t
 | 1     | user-452 | [5, 7] |
 | 2     | user-21  | [3]    |
 
-Por el otro lado, la función de [rubik groupto_list()](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function) permite ir de esta tabla a la anterior.
+Por el otro lado, la función de [rubik **groupto_list()**](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function) permite ir de esta tabla a la anterior.
 
 | Entry | Id       | Roles |
 |-------|----------|-------|
@@ -717,7 +717,7 @@ Vamos a desarrollar un ejemplo en donde vamos a transformar la estructura de un 
 
 #### Caso de uso: Automatizando la venta en línea.
 
-Contamos con un archivo en formato csv, **productos.csv**, que almacena la información de un listado de productos. Para poder subir la información de nuestros productos a un sitio de e-commerce que se encargará de publicarlos en línea, debemos de envíar un archivo JSON con la siguiente estructura:
+Contamos con un archivo en formato csv, [**productos.csv**](https://github.com/josemariasosa/pycon-2019/blob/master/data/productos.csv), que almacena la información de un listado de productos. Para poder subir la información de nuestros productos a un sitio de e-commerce que se encargará de publicarlos en línea, debemos de envíar un archivo JSON con la siguiente estructura:
 
 ```json
 [
@@ -754,23 +754,23 @@ Contamos con un archivo en formato csv, **productos.csv**, que almacena la infor
 
 El JSON está conformado por los siguientes cuatro atributos principales, y subsecuentes atributos secundarios:
 
-- **product_name** - Un string que representa el nombre del producto.
-- **part_number** - Un string único por producto, ejemplos: SKU, UPC, GTIN.
-- **brand** - Un string con la marca o vendedor del producto.
-- **variants** - Una lista que a su vez contiene la información detallada de cada una de las variantes del producto. Para dar de alta una variante, se necesita crear un objeto por cada una con la siguiente información:
-    - **price** - Un string con 2 decimales del precio.
-    - **currency** - Un string indicando la moneda, ejemplos: USD, CAD, MXN.
-    - **stock** - Un string con la cantidad del producto en stock.
-    - **image** - Un diccionario que indique cuál es la imagen principal, y las imágenes secundarias, con la siguiente estructura.
-        - **main** - Un string con el url donde está hosteada la imagen.
-        - **images_list** - Una lista de strings con los urls de las imágenes secundarias. Si no hay imágenes entonces dejar la lista vacía.
-    - **attributes** - Un listado de atributos, donde cada atributo cuenta con la siguiente información:
-        - **name** - El nombre del atributo.
-        - **value** - El valor del atributo.
+- **product_name** - Un *string* que representa el nombre del producto.
+- **part_number** - Un *string* único por producto, ejemplos: SKU, UPC, GTIN.
+- **brand** - Un *string* con la marca o vendedor del producto.
+- **variants** - Una *lista* que a su vez contiene la información detallada de cada una de las variantes del producto. Para dar de alta una variante, se necesita crear un objeto por cada una con la siguiente información:
+    - **price** - Un *string* con 2 decimales del precio.
+    - **currency** - Un *string* indicando la moneda, ejemplos: USD, CAD, MXN.
+    - **stock** - Un *string* con la cantidad del producto en stock.
+    - **image** - Un *diccionario* que indique cuál es la imagen principal, y las imágenes secundarias, con la siguiente estructura.
+        - **main** - Un *string* con el url donde está hosteada la imagen.
+        - **images_list** - Una *lista* de strings con los urls de las imágenes secundarias. Si no hay imágenes entonces dejar la lista vacía.
+    - **attributes** - Una *lista* de atributos, donde cada atributo cuenta con la siguiente información:
+        - **name** - Un *string* con el nombre del atributo.
+        - **value** - Un *string* con el valor del atributo.
 
-Nuestro objetivo es realizar un script en Python que nos permita generar esta estructura de manera automatizada. Todo el código de esta sección se encuentra en el archivo **5-1-products.py**.
+Nuestro objetivo es realizar un script en Python que nos permita generar esta estructura de manera automatizada. Todo el código de esta sección se encuentra en el archivo [**5-1-products.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/5-1-products.py).
 
-Vamos a generar una clase con el nombre **TransformarEstructura** que contenga un método llamado **main()**. El método main() cuenta con 6 pasos que irán transformando poco a poco la tabla original de productos a la estructura destino.
+Vamos a generar una clase con el nombre **TransformarEstructura** que contenga un método llamado **main()**. El método **main()** cuenta con 6 pasos que irán transformando paso a paso la tabla original de productos a la estructura destino.
 
 ```python
     def main(self):
@@ -781,11 +781,10 @@ Vamos a generar una clase con el nombre **TransformarEstructura** que contenga u
         productos = self.agrupando_variantes(productos)
 
         productos = productos.to_dict(orient='records')
-
         print(productos)
 ```
 
-Para el primer paso, el método **importar_productos()**, importa el archivo de productos. El siguiente método, **modificar_imagenes()**, primero modifica el nombre de la columnas y completa los valores faltantes con un string vacío, tal como se muestra a continuación.
+El primer paso es cargar los productos mediante el método **importar_productos()**. El siguiente método, **modificar_imagenes()**, primero modifica el nombre de la columnas y completa los valores faltantes con un string vacío, tal como se muestra a continuación.
 
 ```python
     def formato_imagen(self, images_list):
@@ -805,7 +804,7 @@ Para el primer paso, el método **importar_productos()**, importa el archivo de 
         return productos
 ```
 
-Aquí vamos a utilizar el método de [rubik **concat_to_list()**](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function) para concatenar en una misma lista las columnas de imágenes secundarias en una sola. Posteriormente, aplicaremos el método **formato_imagen()** para eliminar las imágenes faltantes. Por último, la función de [rubik **groupto_dict()**](https://github.com/josemariasosa/rubik#8-the-rkgroupto_dict-function) nos permite agrupar múltiples columnas en una sola columna, como diccionarios.
+Aquí vamos a utilizar el método de [rubik **concat_to_list()**](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function) para concatenar en una misma lista las columnas de imágenes secundarias en una sola. Posteriormente, aplicaremos el método **formato_imagen()** para eliminar las imágenes faltantes. Por último, la función de [rubik **groupto_dict()**](https://github.com/josemariasosa/rubik#8-the-rkgroupto_dict-function) nos permite agrupar múltiples columnas en una sola columna como diccionarios.
 
 El paso 2, **modificar_atributos()**, genera primero la estructura de los atributos con `name` y `value` y luego aplica la función de [rubik **concat_to_list()**](https://github.com/josemariasosa/rubik#2-the-rkconcat_to_list-function) que agrupa los objetos de múltiples columnas en una sola lista.
 
@@ -821,7 +820,7 @@ El paso 2, **modificar_atributos()**, genera primero la estructura de los atribu
         return productos
 ```
 
-El paso 3 nos permite darle la estrucutura adecuada a los precios mediante la función **modificar_precios()**. Lo primero es actualizar el nombre de la columna de precios. Después, el método **formato_precio()** de nuestra clase, nos ayuda a estandarizar los precios, eliminando caracteres innecesarios. Al final, el número se convierte en un string con dos decimales.
+El paso 3 nos permite darle la estructura adecuada a los precios mediante la función **modificar_precios()**. Lo primero es actualizar el nombre de la columna de precios. Después, el método **formato_precio()**, nos ayuda a estandarizar los precios, eliminando caracteres innecesarios. Al final, el número se convierte en un string con 2 decimales.
 
 ```python
     def formato_precio(self, precio):
@@ -837,7 +836,7 @@ El paso 3 nos permite darle la estrucutura adecuada a los precios mediante la fu
         return productos
 ```
 
-El paso 4, último método de nuestra clase, **agrupando_variantes()**. Para este paso se utiliza la función de [rubik **groupto_list()**](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function). Esta función nos permite agrupar todas las líneas de nuestro DataFrame original, en función de la información del producto y sus variantes, para reducirla únicamente a los 3 productos principales, con la información de las variantes en una lista.
+El paso 4 es el último método de nuestra clase: **agrupando_variantes()**. Para este paso se utiliza la función de [rubik **groupto_list()**](https://github.com/josemariasosa/rubik#5-the-rkgroupto_list-function). Esta función nos permite agrupar todas las líneas de nuestro DataFrame original, en función de la información del producto y sus variantes, para reducirla únicamente a los 3 productos principales, con la información de las variantes en una lista.
 
 ```python
     def agrupando_variantes(self, productos):
@@ -881,11 +880,11 @@ En esta sección realizaremos un ejemplo que nos permita visualizar dos casos, a
 
 #### Caso de uso: Estudio de las emergencias.
 
-Partiendo de los datos del archivo **declaratorias_emergencia_desastre.csv**, todo el código de esta sección se encuentra en el archivo **5-2-groupby.py**.
+Partiendo de los datos del archivo [**declaratorias_emergencia_desastre.csv**](https://github.com/josemariasosa/pycon-2019/blob/master/data/declaratorias_emergencia_desastre.csv), todo el código de esta sección se encuentra en el archivo [**5-2-groupby.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/5-2-groupby.py).
 
 Con el fin de aplicar una **función predefinida**, nos haremos las siguientes preguntas:
 
-##### I. Cuál es el promedio de la magnitud de los sismos por estado.
+##### I. ¿Cuál es el promedio de la magnitud de los sismos por estado?
 
 El método **mean()** en el contexto de groupby, nos permite calcular el promedio de los sismos por estado.
 
@@ -896,7 +895,7 @@ tabla_1 = (tabla.groupby('estado')['magniud_sismo']
                 .reset_index(drop=False))
 ```
 
-##### II. En cuántas ciudades se registraron los sismos del estado.
+##### II. ¿En cuántas ciudades se registraron los sismos del estado?
 
 El método **size()** en el contexto de groupby, nos permite calcular el total de registros por estado.
 
@@ -907,7 +906,7 @@ tabla_2 = (tabla.groupby('estado')
                 .reset_index(drop=False))
 ```
 
-Es posible realizar las dos operaciones, anteriores, en una misma tabla con la función de [pandas **agg()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html).
+Es posible realizar las dos operaciones anteriores, en una misma tabla con la función de [pandas **agg()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html).
 
 ```python
 tabla_3 = (tabla.groupby('estado')['magniud_sismo']
@@ -917,9 +916,9 @@ tabla_3 = (tabla.groupby('estado')['magniud_sismo']
 
 Para aplicar una **función customizada**, nos haremos las siguientes preguntas:
 
-##### III. Cuántas fechas distintas se tienen registradas por estado.
+##### III. ¿Cuántas fechas distintas se tienen registradas por estado?
 
-Es importante recalcar en esta sección que debido a que la selección de columnas para trabajar es solo una, en este caso `fecha_evento`, entonces el argumento de la función es una [pandas Series](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html).
+Es importante recalcar en esta sección que debido a que la selección de columnas para trabajar es solo una, en este caso `fecha_evento`, entonces el argumento de la función es una [pandas **Series**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html).
 
 ```python
 calcular_fechas_unicas = lambda x: len(set(x.tolist()))
@@ -929,8 +928,7 @@ tabla_4 = (tabla.groupby('estado')['fecha_evento']
                 .reset_index(drop=False))
 ```
 
-
-##### IV. Cuál es el promedio de la magnitud de los sismos registrados por fecha en cada estado.
+##### IV. ¿Cuál es el promedio de la magnitud de los sismos registrados por fecha en cada estado?
 
 El cálculo es notoriamente más complejo, por lo que se definió una nueva función en python. Al contrario del ejemplo anterior, cuando se selecciónan múltiples columnas para trabajar, en este caso `magniud_sismo` y `fecha_evento`, el argumento que recibe la función es un DataFrame.
 
@@ -947,9 +945,9 @@ tabla_5 = (tabla.groupby('estado')['magniud_sismo', 'fecha_evento']
 
 ### 5.3. Uniendo múltiples fuentes de información (merge).
 
-Para esta sección vamos a trabajar con la información de las gasolineras obtenidas de los dos archivos: **places.xml** y **prices.xml**, importados en la sección **2.4. Importar XML**.
+Para esta sección vamos a trabajar con la información de las gasolineras obtenidas de los dos archivos: [**places.xml**](https://github.com/josemariasosa/pycon-2019/blob/master/data/places.xml) y [**prices.xml**](https://github.com/josemariasosa/pycon-2019/blob/master/data/prices.xml), importados en la sección [**2.4. Importar XML**](https://github.com/josemariasosa/pycon-2019#24-importar-xml).
 
-El verdadero valor de estos 2 archivos se obtiene al unir la información de las gasolineras y el precio de la gasolina. Recordemos que después de importar y transformar la información de los archivos de las gasolineras y los precios las tablas lucen de la siguiente manera:
+El verdadero valor de estos 2 archivos se obtiene al unir la información de las estaciones de gas y el precio de la gasolina. Recordemos que después de importar y transformar la información de los archivos de las gasolineras y los precios las tablas lucen de la siguiente manera:
 
 ```python
 print('Tabla de precios: ')
@@ -975,14 +973,14 @@ print(estaciones.head())
 
 Podemos observar que tenemos una columna que funciona como pivote llamada `place_id`. La demás información está anidada en la columna de `gas`, como una lista de diccionarios que almacenan el `precio` y el `tipo` de gasolina. Y en la columna de `estacion`, que almacena como un diccionario toda la información de la gasolinera.
 
-El archivo **5-3-merge.py** contendrá todo el código de esta sección. Para poder unir la información de las dos fuentes, vamos a integrar las funciones del archivo **2-4-import-xml.py**, para integrarlas en una clase nueva **UnirGasolinaPrecio**. Dicha clase cuenta con un método llamado **main()** que corre los siguientes pasos:
+El archivo [**5-3-merge.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/5-3-merge.py) contendrá todo el código de esta sección. Para poder unir la información de las dos fuentes, vamos a integrar las funciones del archivo [**2-4-import-xml.py**](https://github.com/josemariasosa/pycon-2019/blob/master/pyFiles/2-4-import-xml.py), para integrarlas en una clase nueva **UnirGasolinaPrecio**. Dicha clase cuenta con un método llamado **main()** que corre los siguientes pasos:
 
-- Paso 1: Importar y dar formato a los precios.
-- Paso 2: Importar y dar formato a las estaciones.
-- Paso 3: Llevar a cabo la unión de los precios y las estaciones.
-- Paso 4: Filtrar las estaciones sin ningún precio.
+- **Paso 1**: Importar y dar formato a los precios.
+- **Paso 2**: Importar y dar formato a las estaciones.
+- **Paso 3**: Llevar a cabo la unión de los precios y las estaciones.
+- **Paso 4**: Filtrar las estaciones sin ningún precio.
 
-La función main() de la clase **UnirGasolinaPrecio**, luce así:
+La función **main()** de la clase **UnirGasolinaPrecio**, luce así:
 
 ```python
     def main(self):

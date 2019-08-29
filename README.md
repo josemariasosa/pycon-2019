@@ -2,25 +2,27 @@
 
 ## Contenido de la presentación
 
-1. Introducción a pandas
+1. [**Introducción a pandas**](https://github.com/josemariasosa/pycon-2019#1-introducci%C3%B3n-a-pandas)
     - 1.1. Qué es pandas.
     - 1.2. Cómo instalar pandas.
     - 1.3. Dónde está la documentación oficial.
 
-2. Importar datos utilizando pandas
+2. [**Importar datos utilizando pandas**](https://github.com/josemariasosa/pycon-2019#2-importar-datos-utilizando-pandas)
     - 2.1. Importar y exportar JSON.
     - 2.2. Importar y exportar CSV.
     - 2.3. Importar EXCEL.
     - 2.4. Importar XML.
 
-3. Conociendo nuestros datos
+3. [**Conociendo nuestros datos**](https://github.com/josemariasosa/pycon-2019#3-conociendo-nuestros-datos)
     - 3.1. Head, tail & info.
     - 3.2. Fechas y tipos de datos.
     - 3.3. Valores faltantes.
 
-4. Introducción a rubik
+4. [**Introducción a rubik**](https://github.com/josemariasosa/pycon-2019#4-introducci%C3%B3n-a-rubik)
+    - 4.1. Introducción.
+    - 4.2. Instalación.
 
-5. Casos de uso de pandas
+5. [**Casos de uso de pandas**](https://github.com/josemariasosa/pycon-2019#5-casos-de-uso-de-pandas)
     - 5.1. Transformar la estructura de la información.
     - 5.2. Extracción de información específica.
     - 5.3. Agrupar la información.
@@ -645,7 +647,7 @@ print(df.ffill())
 
 ## 4. Introducción a rubik
 
-### 4.1. Introducción
+### 4.1. Introducción.
 
 Rubik es un módulo sencillo de Python que compila un listado de funciones para trabajar con Pandas. Las funciones listadas de rubik realizan una abstracción de pasos concretos para permitir llevar a cabo transformaciones sencillas en la estructura de los DataFrames de pandas con el fin de reducir la cantidad de código necesario para desempeñar dicha actividad.
 
@@ -675,7 +677,7 @@ La documentación completa de rubik, con algunos ejemplos, puede ser encontrada 
 
 https://github.com/josemariasosa/rubik
 
-### 4.2. Instalación
+### 4.2. Instalación.
 
 Para instalar rubik desde la terminal, primero crear un ambiente virtual **venv**, posteriormente usar el comando de **pip install**.
 

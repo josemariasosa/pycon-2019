@@ -1,5 +1,7 @@
 # Automatizando el análisis y procesamiento de datos con pandas.
 
+Slides: https://docs.google.com/presentation/d/1ZvgiMvP0QP7RMW7jKdsRXdujRtf_k87-7ypG9ma1Y_s/edit?usp=sharing
+
 ## Contenido de la presentación
 
 1. [**Introducción a pandas**](https://github.com/josemariasosa/pycon-2019#1-introducci%C3%B3n-a-pandas)

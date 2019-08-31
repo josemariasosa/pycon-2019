@@ -22,10 +22,10 @@
     - 4.1. Introducción.
     - 4.2. Instalación.
 
-5. [**Casos de uso de pandas**](https://github.com/josemariasosa/pycon-2019#5-casos-de-uso-de-pandas)
+5. [**Casos de uso de pandas + rubik**](https://github.com/josemariasosa/pycon-2019#5-casos-de-uso-de-pandas)
     - 5.1. Transformar la estructura de la información.
-    - 5.2. Extracción de información específica.
-    - 5.3. Agrupar la información.
+    - 5.2. Agrupación de información (groupby).
+    - 5.3. Uniendo múltiples fuentes de información (merge).
 
 ---
 
@@ -481,7 +481,7 @@ print(tabla.info())
 
 Es importante mencionar que cuando una **columna de valores enteros** cuenta con un valor faltante, automáticamente la lista se convierte en tipo flotante.
 
-Para poder trabajar con valores faltantes, en un DataFrame, es crucial definir una estratégia. Las principales maneras de hacerlo son 3:
+Para poder trabajar con valores faltantes, en un DataFrame, es crucial definir una estrategia. Las principales maneras de hacerlo son 3:
 
 - **Eliminar** las muestras con valores faltantes.
 - Establecer un **valor fijo** que tendrán todos los valores faltantes.

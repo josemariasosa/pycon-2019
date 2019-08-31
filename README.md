@@ -22,7 +22,7 @@
     - 4.1. Introducción.
     - 4.2. Instalación.
 
-5. [**Casos de uso de pandas + rubik**](https://github.com/josemariasosa/pycon-2019#5-casos-de-uso-de-pandas)
+5. [**Casos de uso de pandas + rubik**]()
     - 5.1. Transformar la estructura de la información.
     - 5.2. Agrupación de información (groupby).
     - 5.3. Uniendo múltiples fuentes de información (merge).
@@ -702,7 +702,7 @@ import rubik as rk
 import pandas as pd
 ```
 
-## 5. Casos de uso de pandas
+## 5. Casos de uso de pandas + rubik
 
 ### 5.1. Transformar la estructura de la información.
 
